@@ -1,0 +1,488 @@
+:root {
+    color-scheme: dark;
+    --wth-blue: #0a1a5e;
+    --wth-blue-deep: #081347;
+    --wth-gold: #f6c343;
+    --wth-cream: #fef9e7;
+    --wth-slate: #10224d;
+    --wth-silver: #b7c4ff;
+    --wth-card: rgba(8, 19, 71, 0.72);
+    --wth-shadow: rgba(0, 0, 0, 0.3);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Space Grotesk", "Segoe UI", sans-serif;
+    background: radial-gradient(circle at top, #112b8d 0%, #050b2f 65%);
+    color: #f4f6ff;
+    height: 100%;
+    overflow: hidden;
+}
+
+a {
+    color: inherit;
+}
+
+.app-shell {
+    padding: 0rem 2rem 1rem;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.wth-app {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1 1 0;
+    min-height: 0;
+    width: 100%;
+}
+
+.wth-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* Compact header during game mode */
+.wth-game-mode .wth-header {
+    flex-direction: row;
+    align-items: center;
+    gap: 0;
+}
+
+.wth-game-mode .wth-header>div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.wth-game-mode .wth-logo {
+    width: 300px;
+    flex-shrink: 0;
+}
+
+.wth-game-mode .wth-controls {
+    margin-top: 0;
+}
+
+.wth-eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.3rem;
+    font-size: 0.8rem;
+    color: var(--wth-gold);
+    margin: 0 0 0.5rem;
+}
+
+.wth-title {
+    font-size: 3rem;
+    margin: 0;
+}
+
+.wth-logo {
+    width: 100%;
+    max-width: none;
+    height: auto;
+    display: block;
+    margin: 0;
+    filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.45));
+}
+
+.wth-subtitle {
+    margin: 0.6rem 0 0;
+    color: var(--wth-silver);
+    text-align: center;
+}
+
+.wth-controls {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.wth-scoreboard {
+    background: var(--wth-card);
+    border-radius: 20px;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 20px 40px var(--wth-shadow);
+}
+
+.wth-scoreboard h2 {
+    margin: 0 0 0.5rem;
+}
+
+.wth-team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+}
+
+.wth-team-card {
+    background: linear-gradient(160deg, #1b3aa4 0%, #0c1d66 90%);
+    border-radius: 16px;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.team-name {
+    font-weight: 600;
+}
+
+.team-score {
+    font-size: 1.6rem;
+    color: var(--wth-gold);
+}
+
+.wth-panel {
+    background: var(--wth-card);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 20px 40px var(--wth-shadow);
+}
+
+.wth-panel h2 {
+    margin-top: 0;
+}
+
+.muted {
+    color: var(--wth-silver);
+}
+
+.wth-team-editor {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.wth-team-row {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.wth-input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 0.6rem 0.9rem;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.wth-input:focus {
+    outline: 2px solid rgba(246, 195, 67, 0.8);
+}
+
+.wth-input.small {
+    flex: 0 0 auto;
+    width: 110px;
+}
+
+.wth-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.wth-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 0.6rem 0.8rem;
+}
+
+.wth-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.wth-button {
+    background: var(--wth-gold);
+    color: #06102f;
+    border: none;
+    border-radius: 999px;
+    padding: 0.6rem 1.4rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.wth-button:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 25px rgba(246, 195, 67, 0.35);
+}
+
+.wth-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.wth-button.ghost {
+    background: transparent;
+    color: var(--wth-gold);
+    border: 1px solid rgba(246, 195, 67, 0.5);
+}
+
+.wth-button.small {
+    padding: 0.35rem 0.9rem;
+    font-size: 0.85rem;
+}
+
+.wth-board {
+    background: var(--wth-card);
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 20px 40px var(--wth-shadow);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    flex: 1 1 0;
+}
+
+/* Elliptical Orbit Layout */
+.wth-orbit {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.wth-orbit-hub {
+    position: absolute;
+    width: 9%;
+    aspect-ratio: 1;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    background: radial-gradient(circle, var(--wth-gold) 0%, #d4a020 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: clamp(0.6rem, 1.3vw, 1rem);
+    color: var(--wth-blue-deep);
+    text-align: center;
+    line-height: 1.2;
+    z-index: 10;
+    box-shadow: 0 0 30px rgba(246, 195, 67, 0.5), 0 0 60px rgba(246, 195, 67, 0.15);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.wth-orbit-tile {
+    position: absolute;
+    translate: -50% -50%;
+    width: clamp(48px, 5.5vw, 68px);
+    height: clamp(48px, 5.5vw, 68px);
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.18);
+    background: radial-gradient(circle at 35% 35%, #2a4cc4 0%, #0d1f6a 100%);
+    color: var(--wth-gold);
+    font-weight: 700;
+    font-size: clamp(0.75rem, 1.3vw, 1.05rem);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    z-index: 2;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.wth-orbit-tile:hover:not(:disabled) {
+    transform: scale(1.25);
+    box-shadow: 0 0 24px rgba(246, 195, 67, 0.45), 0 8px 25px rgba(0, 0, 0, 0.5);
+    z-index: 20;
+    border-color: var(--wth-gold);
+}
+
+.wth-orbit-tile:disabled {
+    background: radial-gradient(circle at 35% 35%, rgba(80, 80, 100, 0.5) 0%, rgba(40, 40, 60, 0.5) 100%);
+    border-color: rgba(255, 255, 255, 0.08);
+    cursor: not-allowed;
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.wth-orbit-tile-value {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.wth-orbit-tile-used {
+    font-size: clamp(0.8rem, 1.4vw, 1.1rem);
+}
+
+.wth-orbit-label {
+    position: absolute;
+    translate: -50% -50%;
+    background: linear-gradient(135deg, var(--wth-gold) 0%, #e5a520 100%);
+    color: var(--wth-blue-deep);
+    font-weight: 700;
+    font-size: clamp(0.75rem, 1.2vw, 1rem);
+    padding: 0.35rem 0.8rem;
+    border-radius: 1rem;
+    white-space: nowrap;
+    z-index: 5;
+    box-shadow: 0 2px 12px rgba(246, 195, 67, 0.35);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.wth-question h2 {
+    margin: 1rem 0 0;
+    font-size: 2rem;
+    background: rgba(246, 195, 67, 0.12);
+    border: 1px solid rgba(246, 195, 67, 0.35);
+    border-radius: 18px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.3);
+}
+
+.wth-question-text {
+    white-space: pre-wrap;
+    tab-size: 4;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.wth-answer-text {
+    white-space: pre-wrap;
+    tab-size: 4;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: manual;
+}
+
+.wth-question-header {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.wth-badge {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+    font-weight: 600;
+}
+
+.wth-badge.timer {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.wth-buzzer {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.wth-buzzer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.6rem;
+    margin-top: 0.8rem;
+}
+
+.wth-answer {
+    background: rgba(246, 195, 67, 0.15);
+    border-radius: 16px;
+    padding: 1rem 1.2rem;
+    margin-top: 1.5rem;
+    font-size: 2rem;
+}
+
+.wth-answer h3 {
+    margin-top: 0;
+    color: var(--wth-gold);
+}
+
+.wth-score-actions {
+    .wth-answer p {
+        white-space: pre-wrap;
+    }
+
+    margin-top: 1.5rem;
+}
+
+.wth-quick-score {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+}
+
+.wth-team-score-grid {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.wth-team-score-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.wth-team-score-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.wth-winner {
+    text-align: center;
+}
+
+.wth-winner-name {
+    font-size: 2rem;
+    color: var(--wth-gold);
+    margin: 1rem 0 0;
+}
+
+@media (max-width: 900px) {
+    .wth-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .wth-orbit-label {
+        font-size: clamp(0.4rem, 1.4vw, 0.65rem);
+        padding: 0.2rem 0.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .wth-orbit-label {
+        font-size: 0.4rem;
+        padding: 0.15rem 0.35rem;
+    }
+
+    .wth-orbit-hub {
+        font-size: 0.4rem;
+    }
+}
