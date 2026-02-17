@@ -47,9 +47,39 @@ To enable New Relic Browser monitoring for this application, follow these steps:
 
 ## Running Tests
 
-The project includes Playwright E2E tests in `Tests/WthTriviaChallenge.Tests/`.
+### Run All Tests (Quick Path)
 
-### First-Time Setup
+```bash
+# 1) Run unit tests
+dotnet test Tests/WthTriviaChallenge.UnitTests/WthTriviaChallenge.UnitTests.csproj
+
+# 2) Start app for E2E tests (expected at http://localhost:5122)
+dotnet run --project WthTriviaChallenge.csproj --urls http://localhost:5122 &
+
+# 3) Run E2E tests
+dotnet test Tests/WthTriviaChallenge.Tests/WthTriviaChallenge.Tests.csproj
+```
+
+### Unit Tests
+
+The project includes NUnit unit tests in `Tests/WthTriviaChallenge.UnitTests/`. These test the `TriviaDataService` (board cloning, fallback data, team loading) and do not require the app to be running.
+
+```bash
+#cd Tests/WthTriviaChallenge.UnitTests
+dotnet test Tests/WthTriviaChallenge.UnitTests/WthTriviaChallenge.UnitTests.csproj
+```
+
+To run a specific test:
+
+```bash
+dotnet test Tests/WthTriviaChallenge.UnitTests/WthTriviaChallenge.UnitTests.csproj --filter "GetBoardAsync_ReturnsIndependentClones"
+```
+
+### End-to-End Tests (Playwright)
+
+The project also includes Playwright E2E tests in `Tests/WthTriviaChallenge.Tests/`. These tests simulate user interactions with the app in a real browser and require the app to be running at `http://localhost:5122`.
+
+#### First-Time Setup
 
 Install the Playwright browsers (requires a one-time build first):
 
@@ -60,7 +90,7 @@ PLAYWRIGHT_DRIVER_SEARCH_PATH="$(pwd)/bin/Debug/net10.0" \
   dotnet exec bin/Debug/net10.0/Microsoft.Playwright.dll install chromium
 ```
 
-### Running the Tests
+#### Running the Tests
 
 The tests expect the app to be running on `http://localhost:5122`:
 
@@ -69,12 +99,12 @@ The tests expect the app to be running on `http://localhost:5122`:
 dotnet run --urls http://localhost:5122 &
 
 # Run all tests
-cd Tests/WthTriviaChallenge.Tests
-dotnet test
+#cd Tests/WthTriviaChallenge.Tests
+dotnet test Tests/WthTriviaChallenge.Tests/WthTriviaChallenge.Tests.csproj
 
 # Run a single test
-dotnet test --filter "HomepageLoadsWithTitleAndLogo"
-dotnet test --filter "FullGameFlow_SetupThroughWinner"
+dotnet test Tests/WthTriviaChallenge.Tests/WthTriviaChallenge.Tests.csproj --filter "HomepageLoadsWithTitleAndLogo"
+dotnet test Tests/WthTriviaChallenge.Tests/WthTriviaChallenge.Tests.csproj --filter "FullGameFlow_SetupThroughWinner"
 ```
 
 ## Customizing the Game
