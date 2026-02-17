@@ -1,12 +1,15 @@
 {
-  "name": "WhatTheHack Trivia Challenge",
+  "name": "WhatTheHack O11y-Party",
   "image": "mcr.microsoft.com/devcontainers/dotnet:10.0",
   "features": {
     "ghcr.io/devcontainers/features/node:1": {
       "version": "lts"
     }
   },
-  "forwardPorts": [5000, 5001],
+  "forwardPorts": [
+    5000,
+    5001
+  ],
   "postCreateCommand": "dotnet restore",
   "customizations": {
     "vscode": {

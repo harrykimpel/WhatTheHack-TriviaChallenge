@@ -4,12 +4,12 @@
 @inject IJSRuntime JS
 @implements IDisposable
 
-<PageTitle>WTH Trivia Challenge</PageTitle>
+<PageTitle>WTH O11y-Party</PageTitle>
 
 <section class="wth-app @(_phase is GamePhase.Board or GamePhase.Question or GamePhase.Answer ? "wth-game-mode" : "")">
     <header class="wth-header">
         <div>
-            <img class="wth-logo" src="images/WTH-TriviaChallenge.png" alt="WTH Trivia Challenge" />
+            <img class="wth-logo" src="images/WTH-TriviaChallenge.png" alt="WTH O11y-Party" />
             <div class="wth-controls">
                 @if (_phase is GamePhase.Board or GamePhase.Question or GamePhase.Answer)
                 {
@@ -87,7 +87,7 @@
     {
         <section class="wth-board">
             <div class="wth-orbit">
-                <div class="wth-orbit-hub">Trivia<br />Challenge</div>
+                <div class="wth-orbit-hub">O11y-<br />Party</div>
                 @{
                     var catCount = _categories.Count;
                     var catIdx = 0;

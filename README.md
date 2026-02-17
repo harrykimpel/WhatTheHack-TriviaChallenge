@@ -1,6 +1,6 @@
-# WhatTheHack - Trivia Challenge
+# WhatTheHack - O11y-Party
 
-![What The Hack - Trivia Challenge](./wwwroot/images/WTH-TriviaChallenge.png)
+![What The Hack - O11y-Party](./wwwroot/images/WTH-TriviaChallenge.png)
 
 This is a simple trivia-style game built with .NET 10 and ASP.NET Core Blazor.
 

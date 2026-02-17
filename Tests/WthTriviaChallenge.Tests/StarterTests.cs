@@ -12,7 +12,7 @@ public class StarterTests : PageTest
     {
         await Page.GotoAsync(AppUrl);
 
-        await Expect(Page).ToHaveTitleAsync("WTH Trivia Challenge");
+        await Expect(Page).ToHaveTitleAsync("WTH O11y-Party");
         await Expect(Page.Locator(".wth-logo")).ToBeVisibleAsync();
     }
 }
