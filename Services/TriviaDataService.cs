@@ -75,7 +75,9 @@ public sealed class TriviaDataService
                         {
                             Value = question.Value,
                             Prompt = question.Prompt,
-                            Answer = question.Answer
+                            Answer = question.Answer,
+                            CategoryName = question.CategoryName,
+                            IsAnswered = question.IsAnswered
                         })
                         .ToList()
                 })

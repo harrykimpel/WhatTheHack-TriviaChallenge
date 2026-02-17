@@ -354,7 +354,7 @@
         ResetBuzzState();
     }
 
-    private void CompleteQuestion()
+    private async Task CompleteQuestion()
     {
         if (_currentQuestion is null)
         {
@@ -363,7 +363,7 @@
 
         if (!_scoreApplied && _buzzedTeam is not null)
         {
-            AdjustScore(_buzzedTeam, GetQuestionPoints());
+            await AdjustScore(_buzzedTeam, GetQuestionPoints());
         }
 
         StopTimer();
@@ -375,12 +375,19 @@
         : GamePhase.Board;
     }
 
-    private async void AdjustScore(Team team, int delta)
+    private async Task AdjustScore(Team team, int delta)
     {
         team.Score += delta;
         _scoreApplied = true;
 
-        await JS.InvokeAsync<string>("RecordTeamScore", team.Name, team.Score);
+        try
+        {
+            await JS.InvokeAsync<string>("RecordTeamScore", team.Name, team.Score);
+        }
+        catch (JSException)
+        {
+            // RecordTeamScore may not be defined; score is already updated in memory.
+        }
     }
 
     private int GetQuestionPoints()
@@ -415,6 +422,7 @@
         var encoded = System.Net.WebUtility.HtmlEncode(text);
         encoded = encoded.Replace("\r\n", "\n");
         encoded = encoded.Replace("\t", "    ");
+        encoded = encoded.Replace("\n", "<br />");
         return new MarkupString(encoded);
     }
 
