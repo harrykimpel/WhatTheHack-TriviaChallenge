@@ -54,9 +54,9 @@
                     var teamIndex = i;
                     <div class="wth-team-row">
                         <input class="wth-input" value="@_teams[teamIndex].Name"
-                            @oninput="e => UpdateTeamName(teamIndex, e.Value?.ToString())" />
+                               @oninput="e => UpdateTeamName(teamIndex, e.Value?.ToString())" />
                         <button class="wth-button ghost" @onclick="() => RemoveTeam(teamIndex)"
-                            disabled="@(_teams.Count <= 1)">Remove</button>
+                                disabled="@(_teams.Count <= 1)">Remove</button>
                     </div>
                 }
             </div>
@@ -79,7 +79,7 @@
             <div class="wth-actions">
                 <button class="wth-button ghost" @onclick="AddTeam">Add Team</button>
                 <button class="wth-button" @onclick="StartGame"
-                    disabled="@(!_teams.Any(t => !string.IsNullOrWhiteSpace(t.Name)))">Start Game</button>
+                        disabled="@(!_teams.Any(t => !string.IsNullOrWhiteSpace(t.Name)))">Start Game</button>
             </div>
         </section>
     }
@@ -87,7 +87,7 @@
     {
         <section class="wth-board">
             <div class="wth-orbit">
-                <div class="wth-orbit-hub">Trivia<br/>Challenge</div>
+                <div class="wth-orbit-hub">Trivia<br />Challenge</div>
                 @{
                     var catCount = _categories.Count;
                     var catIdx = 0;
@@ -107,10 +107,8 @@
                         var ry = 12.0 + qIdx * 5.0;
                         var px = 50.0 + rx * Math.Cos(angle);
                         var py = 50.0 + ry * Math.Sin(angle);
-                        <button class="wth-orbit-tile"
-                                style="left: @($"{px:F2}")%; top: @($"{py:F2}")%;"
-                                disabled="@question.IsAnswered"
-                                @onclick="() => SelectQuestion(question)">
+                        <button class="wth-orbit-tile" style="left: @($"{px:F2}")%; top: @($"{py:F2}")%;"
+                                disabled="@question.IsAnswered" @onclick="() => SelectQuestion(question)">
                             @if (question.IsAnswered)
                             {
                                 <span class="wth-orbit-tile-used">✓</span>
@@ -154,76 +152,76 @@
                         {
                             <button class="wth-button small" disabled="@_buzzerLocked" @onclick="() => BuzzIn(team)">Buzz:
                                 @team.Name</button>
+                            }
+                        </div>
+                        @if (_buzzedTeam is not null)
+                        {
+                            <p class="muted">Buzzed: @_buzzedTeam.Name</p>
+                            <button class="wth-button ghost small" @onclick="ResetBuzz">Reset Buzz</button>
                         }
                     </div>
-                    @if (_buzzedTeam is not null)
-                    {
-                        <p class="muted">Buzzed: @_buzzedTeam.Name</p>
-                        <button class="wth-button ghost small" @onclick="ResetBuzz">Reset Buzz</button>
-                    }
-                </div>
-            }
+                }
 
-            @if (_phase == GamePhase.Answer)
-            {
-                <div class="wth-answer">
-                    <h3>Answer</h3>
-                    <p class="wth-answer-text">@GetAnswerMarkup()</p>
-                </div>
+                @if (_phase == GamePhase.Answer)
+                {
+                    <div class="wth-answer">
+                        <h3>Answer</h3>
+                        <p class="wth-answer-text">@GetAnswerMarkup()</p>
+                    </div>
 
-                <div class="wth-score-actions">
-                    <h3>Score this question</h3>
-                    <p class="muted">Points: @GetQuestionPoints()</p>
+                    <div class="wth-score-actions">
+                        <h3>Score this question</h3>
+                        <p class="muted">Points: @GetQuestionPoints()</p>
 
-                    @if (_buzzedTeam is not null)
-                    {
-                        <div class="wth-quick-score">
-                            <span>Buzzed team:</span>
-                            <button class="wth-button small" @onclick="() => AdjustScore(_buzzedTeam!, GetQuestionPoints())">Award
-                                @_buzzedTeam.Name</button>
-                            <button class="wth-button ghost small"
-                                @onclick="() => AdjustScore(_buzzedTeam!, -GetQuestionPoints())">Penalize @_buzzedTeam.Name</button>
-                        </div>
-                    }
-
-                    <div class="wth-team-score-grid">
-                        @foreach (var team in _teams)
+                        @if (_buzzedTeam is not null)
                         {
-                            <div class="wth-team-score-row">
-                                <span>@team.Name</span>
-                                <div class="wth-team-score-buttons">
-                                    <button class="wth-button small" @onclick="() => AdjustScore(team, GetQuestionPoints())">+
-                                        @GetQuestionPoints()</button>
+                            <div class="wth-quick-score">
+                                <span>Buzzed team:</span>
+                                <button class="wth-button small" @onclick="() => AdjustScore(_buzzedTeam!, GetQuestionPoints())">Award
+                                    @_buzzedTeam.Name</button>
                                     <button class="wth-button ghost small"
-                                        @onclick="() => AdjustScore(team, -GetQuestionPoints())">- @GetQuestionPoints()</button>
+                                            @onclick="() => AdjustScore(_buzzedTeam!, -GetQuestionPoints())">Penalize @_buzzedTeam.Name</button>
+                                </div>
+                            }
+
+                            <div class="wth-team-score-grid">
+                                @foreach (var team in _teams)
+                                {
+                                    <div class="wth-team-score-row">
+                                        <span>@team.Name</span>
+                                        <div class="wth-team-score-buttons">
+                                            <button class="wth-button small" @onclick="() => AdjustScore(team, GetQuestionPoints())">+
+                                                @GetQuestionPoints()</button>
+                                                <button class="wth-button ghost small"
+                                                        @onclick="() => AdjustScore(team, -GetQuestionPoints())">- @GetQuestionPoints()</button>
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         }
-                    </div>
-                </div>
-            }
 
-            <div class="wth-actions">
-                @if (_phase == GamePhase.Question)
-                {
-                    <button class="wth-button" @onclick="RevealAnswer">Show Answer</button>
+                        <div class="wth-actions">
+                            @if (_phase == GamePhase.Question)
+                            {
+                                <button class="wth-button" @onclick="RevealAnswer">Show Answer</button>
+                            }
+                            <button class="wth-button ghost" @onclick="ReturnToBoard">Back to Board</button>
+                            <button class="wth-button" @onclick="CompleteQuestion">Mark Answered</button>
+                        </div>
+                    </section>
                 }
-                <button class="wth-button ghost" @onclick="ReturnToBoard">Back to Board</button>
-                <button class="wth-button" @onclick="CompleteQuestion">Mark Answered</button>
-            </div>
-        </section>
-    }
-    else if (_phase == GamePhase.Winner)
-    {
-        <section class="wth-panel wth-winner">
-            <h2>Winner</h2>
-            <p class="wth-winner-name">@GetWinnerText()</p>
-            <div class="wth-actions">
-                <button class="wth-button" @onclick="ResetGame">Play Again</button>
-            </div>
-        </section>
-    }
-</section>
+                else if (_phase == GamePhase.Winner)
+                {
+                    <section class="wth-panel wth-winner">
+                        <h2>Winner</h2>
+                        <p class="wth-winner-name">@GetWinnerText()</p>
+                        <div class="wth-actions">
+                            <button class="wth-button" @onclick="ResetGame">Play Again</button>
+                        </div>
+                    </section>
+                }
+            </section>
 
 @code {
     private GamePhase _phase = GamePhase.Setup;
@@ -354,7 +352,7 @@
         ResetBuzzState();
     }
 
-    private void CompleteQuestion()
+    private async Task CompleteQuestion()
     {
         if (_currentQuestion is null)
         {
@@ -363,7 +361,7 @@
 
         if (!_scoreApplied && _buzzedTeam is not null)
         {
-            AdjustScore(_buzzedTeam, GetQuestionPoints());
+            await AdjustScore(_buzzedTeam, GetQuestionPoints());
         }
 
         StopTimer();
@@ -375,12 +373,19 @@
         : GamePhase.Board;
     }
 
-    private async void AdjustScore(Team team, int delta)
+    private async Task AdjustScore(Team team, int delta)
     {
         team.Score += delta;
         _scoreApplied = true;
 
-        await JS.InvokeAsync<string>("RecordTeamScore", team.Name, team.Score);
+        try
+        {
+            await JS.InvokeAsync<string>("RecordTeamScore", team.Name, team.Score);
+        }
+        catch (JSException)
+        {
+            // RecordTeamScore may not be defined; score is already updated in memory.
+        }
     }
 
     private int GetQuestionPoints()
@@ -415,6 +420,7 @@
         var encoded = System.Net.WebUtility.HtmlEncode(text);
         encoded = encoded.Replace("\r\n", "\n");
         encoded = encoded.Replace("\t", "    ");
+        encoded = encoded.Replace("\n", "<br />");
         return new MarkupString(encoded);
     }
 

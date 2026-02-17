@@ -1,0 +1,26 @@
+{
+  "name": "WhatTheHack Trivia Challenge",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:10.0",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    }
+  },
+  "forwardPorts": [5000, 5001],
+  "postCreateCommand": "dotnet restore",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csdevkit",
+        "ms-dotnettools.csharp"
+      ],
+      "settings": {
+        "dotnet.defaultSolution": "WhatTheHack-TriviaChallenge.sln"
+      }
+    }
+  },
+  "remoteEnv": {
+    "ASPNETCORE_ENVIRONMENT": "Development",
+    "DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER": "true"
+  }
+}
