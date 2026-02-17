@@ -1,0 +1,35 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WthTriviaChallenge", "WthTriviaChallenge.csproj", "{D122D158-799D-D94B-322A-EF8E95FFD19D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0AB3BF05-4346-4AA6-1389-037BE0695223}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WthTriviaChallenge.Tests", "Tests\WthTriviaChallenge.Tests\WthTriviaChallenge.Tests.csproj", "{89A213A7-476A-12D6-5B45-1CFBD302FB98}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D122D158-799D-D94B-322A-EF8E95FFD19D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D122D158-799D-D94B-322A-EF8E95FFD19D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D122D158-799D-D94B-322A-EF8E95FFD19D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D122D158-799D-D94B-322A-EF8E95FFD19D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89A213A7-476A-12D6-5B45-1CFBD302FB98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89A213A7-476A-12D6-5B45-1CFBD302FB98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89A213A7-476A-12D6-5B45-1CFBD302FB98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89A213A7-476A-12D6-5B45-1CFBD302FB98}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{89A213A7-476A-12D6-5B45-1CFBD302FB98} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2706DE1D-C2AF-4131-A588-594634DDEF85}
+	EndGlobalSection
+EndGlobal

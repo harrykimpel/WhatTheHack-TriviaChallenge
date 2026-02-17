@@ -45,6 +45,38 @@ To enable New Relic Browser monitoring for this application, follow these steps:
 
 2. Open the URL shown in the terminal (typically `https://localhost:7xxx`).
 
+## Running Tests
+
+The project includes Playwright E2E tests in `Tests/WthTriviaChallenge.Tests/`.
+
+### First-Time Setup
+
+Install the Playwright browsers (requires a one-time build first):
+
+```bash
+cd Tests/WthTriviaChallenge.Tests
+dotnet build
+PLAYWRIGHT_DRIVER_SEARCH_PATH="$(pwd)/bin/Debug/net10.0" \
+  dotnet exec bin/Debug/net10.0/Microsoft.Playwright.dll install chromium
+```
+
+### Running the Tests
+
+The tests expect the app to be running on `http://localhost:5122`:
+
+```bash
+# Start the app in the background
+dotnet run --urls http://localhost:5122 &
+
+# Run all tests
+cd Tests/WthTriviaChallenge.Tests
+dotnet test
+
+# Run a single test
+dotnet test --filter "HomepageLoadsWithTitleAndLogo"
+dotnet test --filter "FullGameFlow_SetupThroughWinner"
+```
+
 ## Customizing the Game
 
 - Questions and answers live in [wwwroot/data/trivia-board.json](wwwroot/data/trivia-board.json).
