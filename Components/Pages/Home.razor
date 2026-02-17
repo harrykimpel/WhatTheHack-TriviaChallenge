@@ -213,9 +213,54 @@
                 }
                 else if (_phase == GamePhase.Winner)
                 {
+                    var rankedTeams = GetRankedTeams();
+                    var podiumTeams = rankedTeams.Take(3).ToList();
+                    var remainingTeams = rankedTeams.Skip(3).ToList();
+
                     <section class="wth-panel wth-winner">
                         <h2>Winner</h2>
                         <p class="wth-winner-name">@GetWinnerText()</p>
+
+                        <div class="wth-podium">
+                            @for (var i = 0; i < podiumTeams.Count; i++)
+                            {
+                                var place = i + 1;
+                                var podiumTeam = podiumTeams[i];
+                                <article class="wth-podium-card place-@place">
+                                    <p class="wth-podium-medal">@GetMedal(place)</p>
+                                    <p class="wth-podium-place">@GetOrdinal(place)</p>
+                                    <p class="wth-podium-team">@podiumTeam.Name</p>
+                                    <p class="wth-podium-score">@podiumTeam.Score pts</p>
+                                </article>
+                            }
+                        </div>
+
+                        @if (remainingTeams.Count > 0)
+                        {
+                            <h3 class="wth-other-teams-heading">Other Teams</h3>
+                            <table class="wth-leaderboard-table">
+                                <thead>
+                                    <tr>
+                                        <th>Place</th>
+                                        <th>Team</th>
+                                        <th>Score</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (var i = 0; i < remainingTeams.Count; i++)
+                                    {
+                                        var place = i + 4;
+                                        var team = remainingTeams[i];
+                                        <tr>
+                                            <td>@GetOrdinal(place)</td>
+                                            <td>@team.Name</td>
+                                            <td>@team.Score</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+
                         <div class="wth-actions">
                             <button class="wth-button" @onclick="ResetGame">Play Again</button>
                         </div>
@@ -507,16 +552,56 @@
         _timer = null;
     }
 
+    private List<Team> GetRankedTeams()
+    {
+        return _teams
+            .OrderByDescending(t => t.Score)
+            .ThenBy(t => t.Name, StringComparer.OrdinalIgnoreCase)
+            .ToList();
+    }
+
+    private static string GetMedal(int place)
+    {
+        return place switch
+        {
+            1 => "🥇",
+            2 => "🥈",
+            3 => "🥉",
+            _ => "🏅"
+        };
+    }
+
+    private static string GetOrdinal(int value)
+    {
+        var remainder100 = value % 100;
+        var suffix = remainder100 is 11 or 12 or 13
+            ? "th"
+            : (value % 10) switch
+            {
+                1 => "st",
+                2 => "nd",
+                3 => "rd",
+                _ => "th"
+            };
+
+        return $"{value}{suffix}";
+    }
+
     private string GetWinnerText()
     {
-        var topScore = _teams.Max(t => t.Score);
-        var winners = _teams.Where(t => t.Score == topScore).Select(t => t.Name).ToList();
+        var rankedTeams = GetRankedTeams();
+        if (rankedTeams.Count == 0)
+        {
+            return "No teams yet.";
+        }
+
+        var topScore = rankedTeams[0].Score;
+        var winners = rankedTeams.Where(t => t.Score == topScore).Select(t => t.Name).ToList();
 
         return winners.Count switch
         {
-            0 => "No teams yet.",
-            1 => $"{winners[0]} with {topScore} points",
-            _ => $"Tie between {string.Join(", ", winners)} with {topScore} points"
+            1 => $"🥇 {winners[0]} with {topScore} points",
+            _ => $"🥇 Tie between {string.Join(", ", winners)} with {topScore} points"
         };
     }
 

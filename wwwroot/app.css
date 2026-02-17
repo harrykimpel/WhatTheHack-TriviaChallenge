@@ -461,7 +461,86 @@ a {
 .wth-winner-name {
     font-size: 2rem;
     color: var(--wth-gold);
-    margin: 1rem 0 0;
+    margin: 1rem 0 1.5rem;
+}
+
+.wth-podium {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.wth-podium-card {
+    min-width: 11rem;
+    padding: 1rem 1.25rem;
+    border-radius: 1rem;
+    border: 1px solid var(--wth-border);
+    background: rgba(255, 255, 255, 0.03);
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2);
+}
+
+.wth-podium-card.place-1 {
+    transform: scale(1.15);
+    border-color: var(--wth-gold);
+}
+
+.wth-podium-card.place-2 {
+    transform: scale(1.08);
+    border-color: #c0c0c0;
+}
+
+.wth-podium-card.place-3 {
+    transform: scale(1.02);
+    border-color: #cd7f32;
+}
+
+.wth-podium-card p {
+    margin: 0.25rem 0;
+}
+
+.wth-podium-medal {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.wth-podium-place {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.wth-podium-team {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.wth-podium-score {
+    font-weight: 600;
+    color: var(--wth-gold);
+}
+
+.wth-other-teams-heading {
+    margin: 0.5rem 0;
+}
+
+.wth-leaderboard-table {
+    width: min(100%, 30rem);
+    margin: 0 auto 1rem;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.wth-leaderboard-table th,
+.wth-leaderboard-table td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--wth-border);
+}
+
+.wth-leaderboard-table th:last-child,
+.wth-leaderboard-table td:last-child {
+    text-align: right;
 }
 
 @media (max-width: 900px) {
@@ -477,6 +556,12 @@ a {
 }
 
 @media (max-width: 600px) {
+    .wth-podium-card.place-1,
+    .wth-podium-card.place-2,
+    .wth-podium-card.place-3 {
+        transform: none;
+    }
+
     .wth-orbit-label {
         font-size: 0.4rem;
         padding: 0.15rem 0.35rem;
